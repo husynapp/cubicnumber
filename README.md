@@ -4,4 +4,4 @@ I have learnt a new way of calculating cubic root without using a calculator fro
 
 I thought I'd apply this to create my project where it generates a random cubic number, and you will have to guess the cubic root number
 
-So used JFrame to create it in 40 minutes. Haven't used any Software Architecture in this. 
+So used JFrame to create it in 40 minutes. Haven't used any Software Architecture or Model View Controller in this

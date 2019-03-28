@@ -10,7 +10,7 @@ import static java.lang.Integer.parseInt;
 
 public class CubeGenerator {
     private JButton buttonClick;
-    private JPanel panelMain;
+    protected JPanel panelMain;
     private JLabel displayResult;
     private JLabel fixedLabel;
     private JTextField guessNumber;
@@ -49,9 +49,12 @@ public class CubeGenerator {
     public void setShowAnswer() {
         int numberGuessed = 0;
         if (guessedNumber != "0") {
-            numberGuessed = parseInt(guessedNumber);
-        }
+            try {
+                numberGuessed = parseInt(guessedNumber);
+            } catch (NumberFormatException e) {
 
+            }
+        }
         if (numberGuessed == originalValue) {
 
             showAnswer.setText("You are correct!, answer is : " + originalValue);
@@ -73,14 +76,5 @@ public class CubeGenerator {
 
     }
 
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("Cubic Number Generator");
-        frame.setContentPane(new CubeGenerator().panelMain);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setPreferredSize(new Dimension(800, 500));
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-    }
 }
 

@@ -1,4 +1,4 @@
-# cubicnumber
+# Cubic Number Generator 
 
 I have learnt a new way of calculating cubic root without using a calculator from https://www.youtube.com/watch?v=Ds8ijPsg26g
 

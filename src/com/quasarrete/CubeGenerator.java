@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.util.Random;
 
 import static java.lang.Integer.parseInt;
+import static javax.swing.JOptionPane.showMessageDialog;
 
 public class CubeGenerator {
     private JButton buttonClick;
@@ -22,7 +23,7 @@ public class CubeGenerator {
 
     public CubeGenerator() {
         originalValue = 0;
-        guessedNumber = "0";
+//        guessedNumber = null;
         random = new Random();
         fixedLabel.setFont(new Font("Serif", Font.PLAIN, 20));
         displayResult.setFont(new Font("Serif", Font.PLAIN, 100));
@@ -37,17 +38,15 @@ public class CubeGenerator {
         submitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (guessNumber.getText() != null) {
-                    guessedNumber = guessNumber.getText();
-                }
+                validateTextField();
                 setShowAnswer();
 
             }
         });
     }
 
-    public void setShowAnswer() {
-        int numberGuessed = 0;
+    private void setShowAnswer() {
+        int numberGuessed = -1;
         if (guessedNumber != "0") {
             try {
                 numberGuessed = parseInt(guessedNumber);
@@ -59,6 +58,7 @@ public class CubeGenerator {
 
             showAnswer.setText("You are correct!, answer is : " + originalValue);
             displayResult();
+            guessedNumber = null;
         } else if (originalValue == 0) {
             showAnswer.setText("Please generate a number and guess a value");
 
@@ -68,11 +68,23 @@ public class CubeGenerator {
         }
     }
 
-    public void displayResult() {
+    private void displayResult() {
         int randomValue = random.nextInt(101);
         originalValue = randomValue;
         int cubedValue = (int) Math.pow(randomValue, 3);
         displayResult.setText(Integer.toString(cubedValue));
+
+    }
+
+    private void validateTextField() {
+        if (guessNumber.getText().equals("")) {
+            showMessageDialog(null, "Make sure field is not EMPTY!!!!");
+
+        } else {
+
+            guessedNumber = guessNumber.getText();
+
+        }
 
     }
 

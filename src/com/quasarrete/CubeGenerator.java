@@ -1,9 +1,12 @@
 package com.quasarrete;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.Random;
 
 import static java.lang.Integer.parseInt;
@@ -17,32 +20,31 @@ public class CubeGenerator {
     private JTextField guessNumber;
     private JButton submitButton;
     private JLabel showAnswer;
-    private Random random;
-    private String guessedNumber;
-    private int originalValue;
+
+    private JLabel imageField;
 
     public CubeGenerator() {
         originalValue = 0;
 //        guessedNumber = null;
         random = new Random();
         fixedLabel.setFont(new Font("Serif", Font.PLAIN, 20));
-        displayResult.setFont(new Font("Serif", Font.PLAIN, 100));
+        displayResult.setFont(new Font("Serif", Font.PLAIN, 80));
         showAnswer.setFont(new Font("Serif", Font.PLAIN, 25));
 //        fixedLabel.setText("Your randomly generated number is: ");
-        buttonClick.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                displayResult();
-            }
-        });
-        submitButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                validateTextField();
-                setShowAnswer();
+        buttonClick.addActionListener(e -> displayResult());
+        submitButton.addActionListener(e -> {
+            validateTextField();
+            setShowAnswer();
 
-            }
         });
+    }
+
+    private Random random;
+    private String guessedNumber;
+    private int originalValue;
+
+    public JLabel getImageField() {
+        return imageField;
     }
 
     private void setShowAnswer() {
@@ -56,7 +58,7 @@ public class CubeGenerator {
         }
         if (numberGuessed == originalValue) {
 
-            showAnswer.setText("You are correct!, answer is : " + originalValue);
+            showAnswer.setText("You are correct: " + originalValue);
             displayResult();
             guessedNumber = null;
         } else if (originalValue == 0) {
